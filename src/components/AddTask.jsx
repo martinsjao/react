@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 function AddTask({ onAddTaskSubmit }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -8,14 +10,25 @@ function AddTask({ onAddTaskSubmit }) {
         placeholder="Digite o titulo da tarefa"
         className="border border-slate-300 outline-slate-400 px-4 py-2 rounded md"
         value={title}
+        onChange={(event) => setTitle(event.target.value)}
       />
       <input
         type="text"
         placeholder="Digite a descrição da tarefa"
         className="border border-slate-300 outline-slate-400 px-4 py-2 rounded md"
         value={description}
+        onChange={(event) => setDescription(event.target.value)}
       />
-      <button className="bg-slate-400 text-white px-4 py-2 rounded-md">
+      <button
+        onClick={() => {
+          if (!title || !description)
+            return alert("Preencha o título e a descrição da tarefa");
+          onAddTaskSubmit(title, description);
+          setTitle("");
+          setDescription("");
+        }}
+        className="bg-slate-800 text-white px-4 py-2 rounded-md hover:bg-slate-500"
+      >
         Adicionar
       </button>
     </div>

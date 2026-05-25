@@ -7,10 +7,7 @@ interface Repo {
 
 function ListRepo() {
   const [repos, setRepos] = useState<Repo[]>([]);
-  //const [filteredRepos, setFilteredRepos] = useState<Repo[]>([]);
   const [search, setSearch] = useState("");
-
-  console.log("Rendering");
 
   useEffect(() => {
     fetch("https://api.github.com/users/martinsjao/repos")
@@ -20,9 +17,6 @@ function ListRepo() {
 
   const filteredRepos =
     search.length > 0 ? repos.filter((repo) => repo.name.includes(search)) : [];
-  //   useEffect(() => {
-  //     setFilteredRepos(repos.filter((repo) => repo.name.includes(search)));
-  //   }, [search]);
 
   return (
     <div>
